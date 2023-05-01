@@ -7,7 +7,7 @@ void main() {
   runApp(GetMaterialApp(
     initialRoute: '/',
     getPages: [
-      GetPage(name: '/', page: () => const Home()),
+      GetPage(name: '/', page: () => HomeView()),
       // GetPage(name: '/second', page: () => Second()),
     ],
     theme: ThemeData(
