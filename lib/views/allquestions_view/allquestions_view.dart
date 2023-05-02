@@ -9,6 +9,13 @@ class AllQuestionsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("All questions");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Všechny otázky",
+        ),
+      ),
+      body: Text("All questions"),
+    );
   }
 }

@@ -11,6 +11,7 @@ void main() {
   runApp(
     DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => HomeView()),

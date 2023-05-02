@@ -9,6 +9,11 @@ class ExamView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Exam");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Zkouška"),
+      ),
+      body: Text("Exam"),
+    );
   }
 }
