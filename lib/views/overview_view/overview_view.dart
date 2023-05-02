@@ -12,63 +12,60 @@ class OverviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Učení"),
+        title: const Text("Učení"),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Obx(() => Text("${controller.counter.value}")),
-              ElevatedButton(onPressed: controller.increment, child: Text("click me")),
-              SizedBox(
-                width: double.infinity,
-                child: CustomCard(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                    child: Column(
-                      children: [
-                        const Text("Kurz Autoškola B"),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text("Progress: "),
-                            Text("Progress: "),
-                          ],
-                        ),
-                      ],
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(20.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate.fixed(
+                <Widget>[
+                  CustomCard(
+                    onTap: () {},
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+                      child: Column(
+                        children: [
+                          const Text("Kurz Autoškola B"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text("Progress: "),
+                              Text("Progress: "),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: CustomCard(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                    child: Column(
-                      children: [
-                        const Text("Kurz Autoškola B"),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text("Progress: "),
-                            Text("Progress: "),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: CustomCard(
+                      onTap: () {},
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
+                        child: Column(
+                          children: [
+                            const Text("Kurz Autoškola B"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text("Progress: "),
+                                Text("Progress: "),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

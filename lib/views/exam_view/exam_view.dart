@@ -11,9 +11,22 @@ class ExamView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Zkouška"),
+        title: const Text("Zkouška"),
       ),
-      body: Text("Exam"),
+      body: const CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.all(20.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate.fixed(
+                <Widget>[
+                  Text("Exam"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

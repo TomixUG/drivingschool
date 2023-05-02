@@ -15,7 +15,22 @@ class AllQuestionsView extends StatelessWidget {
           "Všechny otázky",
         ),
       ),
-      body: Text("All questions"),
+      body: const CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.all(20.0),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate.fixed(
+                <Widget>[
+                  Text("hello"),
+                  SizedBox(height: 200),
+                  Text("hello"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
