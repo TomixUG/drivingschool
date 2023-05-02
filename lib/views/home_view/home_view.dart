@@ -30,13 +30,13 @@ class HomeView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          onTap: controller.changeTabIndex,
-          currentIndex: controller.tabIndex.value,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Učení"),
-            BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Zkouška"),
-            BottomNavigationBarItem(icon: Icon(Icons.book), label: "Všechny otázky"),
+        () => NavigationBar(
+          onDestinationSelected: controller.changeTabIndex,
+          selectedIndex: controller.tabIndex.value,
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: "Učení"),
+            NavigationDestination(icon: Icon(Icons.assignment), label: "Zkouška"),
+            NavigationDestination(icon: Icon(Icons.book), label: "Všechny otázky"),
           ],
         ),
       ),
