@@ -39,6 +39,7 @@ dependencies:
   sidebarx: ^0.15.0
   get: ^4.6.5
   dynamic_color: ^1.6.3
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
