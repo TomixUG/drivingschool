@@ -89,6 +89,77 @@ class OverviewView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
+                  CustomCard(
+                    onTap: () {},
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(Icons.flag),
+                              SizedBox(width: 20),
+                              Text(
+                                "Označené otázky",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text("50 otázek"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomCard(
+                    onTap: () {},
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(Icons.close),
+                              SizedBox(width: 20),
+                              Text(
+                                "Špatné otázky",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text("125 otázek"),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  CustomCard(
+                    onTap: () {},
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(Icons.question_mark),
+                              SizedBox(width: 20),
+                              Text(
+                                "Nezobrazené otázky",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text("950 otázek"),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
