@@ -11,20 +11,21 @@ class AllQuestionsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Všechny otázky",
         ),
       ),
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             sliver: SliverList(
               delegate: SliverChildListDelegate.fixed(
                 <Widget>[
-                  Text("hello"),
-                  SizedBox(height: 200),
-                  Text("hello"),
+                  ElevatedButton(
+                    onPressed: controller.btnClick,
+                    child: const Text("hello"),
+                  )
                 ],
               ),
             ),
