@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class AllQuestionsViewController extends GetxController {
   void btnClick() async {
-    final allRows = await Get.find<DbController>().queryAll();
+    final allRows = await Get.find<DbController>().getAllQuestions();
     debugPrint('query all rows:');
     for (final row in allRows) {
       debugPrint(row.toString());
