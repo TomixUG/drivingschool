@@ -25,12 +25,22 @@ class DbController extends GetxController {
 
     // data database
     String dataDbPath = join(await getDatabasesPath(), 'data.db');
+    debugPrint(dataDbPath);
+
     Database dataDb = await openDatabase(
       dataDbPath,
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE progress(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
-        );
+      onCreate: (db, version) async {
+        debugPrint("creating dataDb tables...");
+        await db.execute('''
+          CREATE TABLE user_answers (
+            id INTEGER PRIMARY KEY,
+            question_id TEXT NOT NULL,
+            answer_id TEXT NOT NULL,
+            is_correct BOOLEAN NOT NULL,
+            FOREIGN KEY (question_id) REFERENCES questions (id),
+            FOREIGN KEY (answer_id) REFERENCES answers (id)
+          );
+          ''');
       },
       version: 1,
     );
@@ -48,8 +58,7 @@ class DbController extends GetxController {
     _database = await openDatabase(questionsDbPath);
 
     // attach dataDb
-    String absoluteEndPath = join(applicationDirectory.path, "data.db");
-    await _database.rawQuery("ATTACH DATABASE '$absoluteEndPath' as 'dataDb'");
+    await _database.rawQuery("ATTACH DATABASE '$dataDbPath' as 'dataDb'");
   }
 
   Future<List<Map<String, dynamic>>> getAllQuestions() async {
@@ -57,7 +66,9 @@ class DbController extends GetxController {
   }
 
   void test() {
-    _database.rawQuery("SELECT * from dataDb.progress");
+    // _database.rawQuery("SELECT * from dataDb.progress");
+    _database.rawQuery(
+        "INSERT INTO dataDb.user_answers (question_id, answer_id, is_correct) VALUES ('0606038624', '3057824', 0);");
   }
 
   // Future<int> insertUser(Map<String, dynamic> row) async {
