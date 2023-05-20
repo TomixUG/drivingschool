@@ -15,22 +15,13 @@ class AllQuestionsView extends StatelessWidget {
           "Všechny otázky",
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.all(20.0),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate.fixed(
-                <Widget>[
-                  ElevatedButton(
-                    onPressed: controller.btnClick,
-                    child: const Text("hello"),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: ListView.builder(
+        itemCount: controller.questions.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(controller.questions[index].text),
+          );
+        },
       ),
     );
   }

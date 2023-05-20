@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:drivingschool/models/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,20 +14,13 @@ import 'dart:io' as io;
 class DbController extends GetxController {
   late Database _database;
 
-  @override
-  void onInit() {
-    super.onInit();
-    initDatabase();
-  }
-
   Future<void> initDatabase() async {
     WidgetsFlutterBinding.ensureInitialized();
     debugPrint("initilizing DB");
 
-    // data database
+    // create data database
     String dataDbPath = join(await getDatabasesPath(), 'data.db');
     debugPrint(dataDbPath);
-
     Database dataDb = await openDatabase(
       dataDbPath,
       onCreate: (db, version) async {
@@ -61,8 +55,9 @@ class DbController extends GetxController {
     await _database.rawQuery("ATTACH DATABASE '$dataDbPath' as 'dataDb'");
   }
 
-  Future<List<Map<String, dynamic>>> getAllQuestions() async {
-    return await _database.query('questions');
+  Future<List<Question>> getAllQuestions() async {
+    final List<Map<String, Object?>> queryResult = await _database.query('questions');
+    return queryResult.map((e) => Question.fromMap(e)).toList();
   }
 
   void test() {

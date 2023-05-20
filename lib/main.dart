@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // create instance of DbController (inits the db)
-  Get.put(DbController());
+  await Get.put(DbController()).initDatabase();
 
   runApp(
     DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {

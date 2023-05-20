@@ -1,15 +1,17 @@
+import 'package:drivingschool/models/question.dart';
 import 'package:drivingschool/utils/db_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AllQuestionsViewController extends GetxController {
-  void btnClick() async {
-    //   final allRows = await Get.find<DbController>().getAllQuestions();
-    //   debugPrint('query all rows:');
-    //   for (final row in allRows) {
-    //     debugPrint(row.toString());
-    //   }
+  List<Question> questions = <Question>[].obs;
+  @override
+  void onInit() async {
+    loadQuestions();
+    super.onInit();
+  }
 
-    Get.find<DbController>().test();
+  void loadQuestions() async {
+    questions = await Get.find<DbController>().getAllQuestions();
   }
 }
