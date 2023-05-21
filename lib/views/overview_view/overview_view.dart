@@ -7,7 +7,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class OverviewView extends StatelessWidget {
   OverviewView({super.key});
 
-  OverviewViewController controller = Get.put(OverviewViewController());
+  final OverviewViewController controller = Get.put(OverviewViewController());
 
   @override
   Widget build(BuildContext context) {

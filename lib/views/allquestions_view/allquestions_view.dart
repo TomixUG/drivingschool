@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class AllQuestionsView extends StatelessWidget {
   AllQuestionsView({super.key});
 
-  AllQuestionsViewController controller = Get.put(AllQuestionsViewController());
+  final AllQuestionsViewController controller = Get.put(AllQuestionsViewController());
 
   @override
   Widget build(BuildContext context) {
