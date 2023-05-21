@@ -1,6 +1,5 @@
 import 'package:drivingschool/models/question.dart';
 import 'package:drivingschool/utils/db_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AllQuestionsViewController extends GetxController {

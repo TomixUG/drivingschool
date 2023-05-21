@@ -1,3 +1,4 @@
+import 'package:drivingschool/components/shared/expansion_card.dart';
 import 'package:drivingschool/views/allquestions_view/allquestions_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,8 +19,9 @@ class AllQuestionsView extends StatelessWidget {
       body: ListView.builder(
         itemCount: controller.questions.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(controller.questions[index].text),
+          return ExpansionCard(
+            title: controller.questions[index].text,
+            id: controller.questions[index].id,
           );
         },
       ),
