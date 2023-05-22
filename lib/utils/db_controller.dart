@@ -1,4 +1,5 @@
 import 'package:drivingschool/models/question.dart';
+import 'package:drivingschool/utils/parse_questions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -53,8 +54,13 @@ class DbController extends GetxController {
   }
 
   Future<List<Question>> getAllQuestions() async {
-    final List<Map<String, Object?>> queryResult = await _database.query('questions');
-    return queryResult.map((e) => Question.fromMap(e)).toList();
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
+      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
+      from questions join answers
+      on (questions.id = answers.question_id); 
+    ''');
+    return parseQuestions(result);
   }
 
   void test() {

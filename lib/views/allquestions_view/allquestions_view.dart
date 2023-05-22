@@ -21,7 +21,17 @@ class AllQuestionsView extends StatelessWidget {
         itemBuilder: (context, index) {
           return ExpansionCard(
             title: controller.questions[index].text,
-            id: controller.questions[index].id,
+            child: ListView.builder(
+              shrinkWrap: true, // Set shrinkWrap to true for the inner ListView.builder
+              physics: const NeverScrollableScrollPhysics(), // Disable scrolling for the inner ListView
+              itemCount: controller.questions[index].answers.length,
+              itemBuilder: (c, i) {
+                return Text(
+                  controller.questions[index].answers[i].text,
+                  style: TextStyle(color: controller.questions[index].answers[i].isCorrect ? Colors.green : Colors.red),
+                );
+              },
+            ),
           );
         },
       ),

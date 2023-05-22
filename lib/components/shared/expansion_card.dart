@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 
 class ExpansionCard extends StatefulWidget {
   final String title;
-  final String id;
-  const ExpansionCard({Key? key, required this.title, required this.id}) : super(key: key);
+  final Widget child;
+
+  const ExpansionCard({Key? key, required this.title, required this.child})
+      : super(key: key);
 
   @override
   State<ExpansionCard> createState() => _ExpansionCardState();
 }
 
-class _ExpansionCardState extends State<ExpansionCard> with SingleTickerProviderStateMixin {
+class _ExpansionCardState extends State<ExpansionCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isExpanded = false;
@@ -69,10 +72,7 @@ class _ExpansionCardState extends State<ExpansionCard> with SingleTickerProvider
             SizeTransition(
               axisAlignment: -1.0,
               sizeFactor: _animation,
-              child: Text(
-                widget.id,
-                style: const TextStyle(fontSize: 16.0),
-              ),
+              child: widget.child,
             ),
           ],
         ),
