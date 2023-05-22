@@ -1,5 +1,7 @@
+import 'package:drivingschool/models/cat.dart';
 import 'package:drivingschool/models/question.dart';
 import 'package:drivingschool/utils/parse_questions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -61,6 +63,16 @@ class DbController extends GetxController {
       on (questions.id = answers.question_id); 
     ''');
     return parseQuestions(result);
+  }
+
+  Future<List<Cat>> getCategories() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select categories.id, categories.name, count(*) as count
+      from categories join questions
+      on (categories.id = questions.category_id)
+      group by categories.id;
+    ''');
+    return result.map((e) => Cat.fromMap(e)).toList();
   }
 
   void test() {

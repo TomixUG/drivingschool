@@ -1,8 +1,10 @@
+import 'package:drivingschool/models/cat.dart';
+import 'package:drivingschool/utils/db_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LearnQuestionsViewController extends GetxController {
-  // List<Question> questions = <Question>[].obs;
+  List<Cat> categories = <Cat>[].obs;
 
   @override
   void onInit() async {
@@ -12,6 +14,6 @@ class LearnQuestionsViewController extends GetxController {
   }
 
   void loadCategories() async {
-    // questions = await Get.find<DbController>().getAllQuestions();
+    categories = await Get.find<DbController>().getCategories();
   }
 }
