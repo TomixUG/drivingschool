@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:drivingschool/utils/db_controller.dart';
+import 'package:drivingschool/views/allquestions_view/learnquestions/learnquestions_view.dart';
+import 'package:drivingschool/views/allquestions_view/learnquestions/learnquestions_view_controller.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:drivingschool/views/home_view/home_view.dart';
@@ -29,7 +31,7 @@ void main() async {
         initialRoute: '/',
         getPages: [
           GetPage(name: '/', page: () => HomeView()),
-          // GetPage(name: '/second', page: () => Second()),
+          GetPage(name: '/learnquestions', page: () => LearnQuestionsView()),
         ],
         theme: ThemeData(
           colorScheme: lightColorScheme ?? const ColorScheme.light(),
