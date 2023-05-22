@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class ExpansionCard extends StatefulWidget {
   final String title;
-  final Widget minimalized;
+  final Widget child;
 
-  const ExpansionCard({Key? key, required this.title, required this.minimalized}) : super(key: key);
+  const ExpansionCard({Key? key, required this.title, required this.child}) : super(key: key);
 
   @override
   State<ExpansionCard> createState() => _ExpansionCardState();
@@ -70,7 +70,7 @@ class _ExpansionCardState extends State<ExpansionCard> with SingleTickerProvider
             SizeTransition(
               axisAlignment: -1.0,
               sizeFactor: _animation,
-              child: widget.minimalized,
+              child: widget.child,
             ),
           ],
         ),
