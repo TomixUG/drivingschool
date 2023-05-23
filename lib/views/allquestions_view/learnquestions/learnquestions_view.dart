@@ -14,29 +14,26 @@ class LearnQuestionsView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Kategorie"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView.builder(
-          itemCount: controller.categories.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 8, top: 8),
-              child: CustomCard(
-                onTap: () {},
-                child: Container(
-                  margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
-                  child: Row(
-                    children: [
-                      Text(controller.categories[index].name),
-                      const Spacer(),
-                      Text("${controller.categories[index].count}"),
-                    ],
-                  ),
+      body: ListView.builder(
+        itemCount: controller.categories.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8, top: 8, right: 20, left: 20),
+            child: CustomCard(
+              onTap: () {},
+              child: Container(
+                margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
+                child: Row(
+                  children: [
+                    Text(controller.categories[index].name),
+                    const Spacer(),
+                    Text("${controller.categories[index].count}"),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
