@@ -16,4 +16,8 @@ class LearnQuestionsViewController extends GetxController {
   void loadCategories() async {
     categories = await Get.find<DbController>().getCategories();
   }
+
+  int getTotalCategories() {
+    return categories.fold(0, (int sum, Cat item) => sum + item.count);
+  }
 }
