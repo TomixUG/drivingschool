@@ -22,7 +22,7 @@ class LearnQuestionsView extends StatelessWidget {
               delegate: SliverChildListDelegate.fixed(
                 <Widget>[
                   CustomCard(
-                    onTap: () {},
+                    onTap: controller.openTest,
                     child: Container(
                       margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
                       child: Row(

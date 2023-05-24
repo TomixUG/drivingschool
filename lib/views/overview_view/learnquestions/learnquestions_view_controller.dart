@@ -20,4 +20,8 @@ class LearnQuestionsViewController extends GetxController {
   int getTotalCategories() {
     return categories.fold(0, (int sum, Cat item) => sum + item.count);
   }
+
+  void openTest() {
+    Get.toNamed("/test");
+  }
 }
