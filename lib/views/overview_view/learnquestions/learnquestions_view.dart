@@ -1,6 +1,5 @@
 import 'package:drivingschool/components/shared/custom_card.dart';
-import 'package:drivingschool/models/cat.dart';
-import 'package:drivingschool/views/allquestions_view/learnquestions/learnquestions_view_controller.dart';
+import 'package:drivingschool/views/overview_view/learnquestions/learnquestions_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
