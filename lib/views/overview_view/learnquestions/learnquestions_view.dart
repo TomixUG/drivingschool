@@ -22,7 +22,7 @@ class LearnQuestionsView extends StatelessWidget {
               delegate: SliverChildListDelegate.fixed(
                 <Widget>[
                   CustomCard(
-                    onTap: controller.openTest,
+                    onTap: () => controller.openTestAll(),
                     child: Container(
                       margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
                       child: Row(
@@ -43,7 +43,7 @@ class LearnQuestionsView extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8, top: 8),
                         child: CustomCard(
-                          onTap: () {},
+                          onTap: () => controller.openTestCategories(controller.categories[index].id),
                           child: Container(
                             margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
                             child: Row(

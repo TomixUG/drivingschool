@@ -75,11 +75,22 @@ class DbController extends GetxController {
     return result.map((e) => Cat.fromMap(e)).toList();
   }
 
-  void test() {
-    // _database.rawQuery("SELECT * from dataDb.progress");
-    _database.rawQuery(
-        "INSERT INTO dataDb.user_answers (question_id, answer_id, is_correct) VALUES ('0606038624', '3057824', 0);");
+  Future<List<Question>> getQuestions(String categoryId) async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
+      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
+      from questions join answers
+      on (questions.id = answers.question_id)
+      where questions.category_id = ?;
+    ''', [categoryId]);
+    return parseQuestions(result);
   }
+
+  // void test() {
+  //   // _database.rawQuery("SELECT * from dataDb.progress");
+  //   _database.rawQuery(
+  //       "INSERT INTO dataDb.user_answers (question_id, answer_id, is_correct) VALUES ('0606038624', '3057824', 0);");
+  // }
 
   // Future<int> insertUser(Map<String, dynamic> row) async {
   //   return await _database.insert('users', row);
