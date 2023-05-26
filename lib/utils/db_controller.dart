@@ -60,7 +60,8 @@ class DbController extends GetxController {
       select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
       answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
       from questions join answers
-      on (questions.id = answers.question_id); 
+      on (questions.id = answers.question_id)
+      order by random();
     ''');
     return parseQuestions(result);
   }
@@ -81,7 +82,8 @@ class DbController extends GetxController {
       answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
       from questions join answers
       on (questions.id = answers.question_id)
-      where questions.category_id = ?;
+      where questions.category_id = ?
+      order by random();
     ''', [categoryId]);
     return parseQuestions(result);
   }
