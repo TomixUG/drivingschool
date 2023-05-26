@@ -11,16 +11,38 @@ class TestView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kategorie"),
+        title: Obx(() => Text("Otázka ${controller.currentQuestion}/${controller.questions.length}")),
       ),
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             sliver: SliverList(
               delegate: SliverChildListDelegate.fixed(
                 <Widget>[
-                  Text("hello"),
+                  Obx(
+                    () => Text(controller.questions[controller.currentQuestion.toInt()].text),
+                  ),
+                  Obx(
+                    () => ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: controller.questions[controller.currentQuestion.toInt()].answers.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(controller.questions[controller.currentQuestion.toInt()].answers[index].text),
+                        );
+                      },
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: controller.nextQuestion,
+                    child: const Text("Next question"),
+                  ),
+                  ElevatedButton(
+                    onPressed: controller.prevQuestion,
+                    child: const Text("Previous question"),
+                  ),
                 ],
               ),
             ),
