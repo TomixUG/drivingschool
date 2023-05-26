@@ -11,43 +11,57 @@ class TestView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text("Otázka ${controller.currentQuestion}/${controller.questions.length}")),
+        title: Obx(() => Text("Otázka ${controller.currentQuestion.value + 1}/${controller.questions.length}")),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.all(20.0),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate.fixed(
-                <Widget>[
-                  Obx(
-                    () => Text(controller.questions[controller.currentQuestion.toInt()].text),
-                  ),
-                  Obx(
-                    () => ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.questions[controller.currentQuestion.toInt()].answers.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(controller.questions[controller.currentQuestion.toInt()].answers[index].text),
-                        );
-                      },
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: controller.nextQuestion,
-                    child: const Text("Next question"),
-                  ),
-                  ElevatedButton(
-                    onPressed: controller.prevQuestion,
-                    child: const Text("Previous question"),
-                  ),
-                ],
-              ),
+      bottomNavigationBar: Container(
+        color: Theme.of(context).primaryColor,
+        height: 50,
+        child: Row(
+          children: [
+            ElevatedButton(
+              onPressed: controller.prevQuestion,
+              child: const Text("Previous question"),
             ),
-          ),
-        ],
+            const Spacer(),
+            ElevatedButton(
+              onPressed: controller.nextQuestion,
+              child: const Text("Next question"),
+            ),
+          ],
+        ),
+      ),
+      body: PageView.builder(
+        controller: controller.pageController,
+        onPageChanged: (int page) {
+          controller.currentQuestion.value = page;
+        },
+        itemCount: controller.questions.length,
+        itemBuilder: (context, index) {
+          return CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.all(20.0),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate.fixed(
+                    <Widget>[
+                      Text(controller.questions[index].text),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: controller.questions[index].answers.length,
+                        itemBuilder: (BuildContext c, int i) {
+                          return ListTile(
+                            title: Text(controller.questions[index].answers[i].text),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
