@@ -7,6 +7,7 @@ class TestViewController extends GetxController {
   var currentQuestion = 0.obs;
 
   final PageController pageController = PageController(initialPage: 0);
+  var switching = false;
 
   @override
   void onInit() async {
@@ -15,14 +16,24 @@ class TestViewController extends GetxController {
   }
 
   void nextQuestion() async {
+    if (switching == true) return;
+
     if (currentQuestion >= questions.length - 1) return; // the test is completed
+
+    switching = true;
     await pageController.animateToPage(++currentQuestion.value,
         duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+    switching = false;
   }
 
   void prevQuestion() async {
+    if (switching == true) return;
+
     if (currentQuestion <= 0) return;
+
+    switching = true;
     await pageController.animateToPage(--currentQuestion.value,
         duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
+    switching = false;
   }
 }
