@@ -12,6 +12,20 @@ class TestView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Obx(() => Text("Otázka ${controller.currentQuestion.value + 1}/${controller.questions.length}")),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: Obx(() =>
+              LinearProgressIndicator(value: controller.currentQuestion.value / (controller.questions.length - 1))),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.star_border),
+            tooltip: 'Označit',
+            onPressed: () {
+              // handle the press
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
         color: Theme.of(context).primaryColor,
