@@ -1,0 +1,3 @@
+[submodule "drivingschool-downloader"]
+	path = drivingschool-downloader
+	url = https://github.com/TomixUG/drivingschool-downloader.git
