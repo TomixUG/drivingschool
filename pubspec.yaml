@@ -68,6 +68,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/db/questions.db
+    - ./assets/images/14/
+    - ./assets/images/16/
+    - ./assets/images/17/
+    - ./assets/images/18/
+    - ./assets/images/19/
+    - ./assets/images/20/
+    - ./assets/images/21/
+    - ./assets/images/22/
+    - ./assets/images/23/
+    - ./assets/images/24/
+    - ./assets/images/25/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

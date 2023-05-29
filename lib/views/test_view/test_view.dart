@@ -63,6 +63,12 @@ class TestView extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildListDelegate.fixed(
                     <Widget>[
+                      if (controller.questions[index].imageUrl != null) ...[
+                        Image(
+                          image: AssetImage(
+                              'assets/images/${controller.questions[index].categoryId}/${controller.questions[index].imageUrl}'),
+                        )
+                      ],
                       Text(
                         controller.questions[index].text,
                         style: const TextStyle(fontSize: 16),
