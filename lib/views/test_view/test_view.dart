@@ -74,23 +74,27 @@ class TestView extends StatelessWidget {
                         itemBuilder: (BuildContext c, int i) {
                           return Container(
                             margin: const EdgeInsets.only(top: 10, bottom: 10), // Adjust the margin as needed
-                            child: InkWell(
-                              borderRadius: BorderRadius.circular(16),
-                              onTap: () => controller.submitAnswer(
-                                  controller.questions[index].answers[i], controller.questions[index].answers),
-                              child: Obx(
-                                () => Container(
-                                  padding: const EdgeInsets.all(10.0),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Theme.of(context).focusColor, width: 3),
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: controller.showedAnswers.contains(controller.questions[index].answers[i].id)
-                                        ? (controller.questions[index].answers[i].isCorrect
-                                            ? Colors.green.withOpacity(0.4)
-                                            : Colors.red.withOpacity(0.4))
-                                        : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.4),
+                            child: Obx(
+                              () => InkWell(
+                                borderRadius: BorderRadius.circular(16),
+                                onTap: controller.answeredQuestions.contains(controller.questions[index])
+                                    ? null
+                                    : () => controller.submitAnswer(
+                                        controller.questions[index].answers[i], controller.questions[index]),
+                                child: Obx(
+                                  () => Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Theme.of(context).focusColor, width: 3),
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: controller.showedAnswers.contains(controller.questions[index].answers[i])
+                                          ? (controller.questions[index].answers[i].isCorrect
+                                              ? Colors.green.withOpacity(0.4)
+                                              : Colors.red.withOpacity(0.4))
+                                          : Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.4),
+                                    ),
+                                    child: Text(controller.questions[index].answers[i].text),
                                   ),
-                                  child: Text(controller.questions[index].answers[i].text),
                                 ),
                               ),
                             ),

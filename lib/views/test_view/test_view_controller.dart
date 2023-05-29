@@ -10,7 +10,8 @@ class TestViewController extends GetxController {
   final PageController pageController = PageController(initialPage: 0);
   var switching = false;
 
-  final showedAnswers = <String>[].obs;
+  final showedAnswers = <Answer>[].obs;
+  final answeredQuestions = <Question>[].obs;
 
   @override
   void onInit() async {
@@ -18,15 +19,17 @@ class TestViewController extends GetxController {
     super.onInit();
   }
 
-  void submitAnswer(Answer answer, List<Answer> answers) {
+  void submitAnswer(Answer answer, Question question) {
+    answeredQuestions.add(question);
+
     if (answer.isCorrect) {
-      showedAnswers.add(answer.id);
+      showedAnswers.add(answer);
     } else {
       // add all correct answers
-      for (var a in answers) {
-        if (a.isCorrect) showedAnswers.add(a.id);
+      for (var a in question.answers) {
+        if (a.isCorrect) showedAnswers.add(a);
       }
-      showedAnswers.add(answer.id);
+      showedAnswers.add(answer);
     }
   }
 
