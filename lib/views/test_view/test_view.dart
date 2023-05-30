@@ -65,9 +65,12 @@ class TestView extends StatelessWidget {
                   delegate: SliverChildListDelegate.fixed(
                     <Widget>[
                       if (controller.questions[index].imageUrl != null) ...[
-                        VPlayer(
-                          asset:
-                              'assets/images/${controller.questions[index].categoryId}/${controller.questions[index].imageUrl}',
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: VPlayer(
+                            asset:
+                                'assets/images/${controller.questions[index].categoryId}/${controller.questions[index].imageUrl}',
+                          ),
                         ),
                       ],
                       Text(

@@ -42,14 +42,20 @@ class _VPlayerState extends State<VPlayer> {
   Widget build(BuildContext context) {
     if (widget.asset.split(".").last == "mp4") {
       return _controller.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
+          ? ConstrainedBox(
+              constraints: const BoxConstraints(),
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ),
             )
-          : const CircularProgressIndicator();
+          : const Text("");
     } else {
-      return Image(
-        image: AssetImage(widget.asset),
+      return ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 230),
+        child: Image.asset(
+          widget.asset,
+        ),
       );
     }
   }
