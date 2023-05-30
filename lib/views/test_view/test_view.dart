@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:drivingschool/components/test/video_player.dart';
 import 'package:drivingschool/views/test_view/test_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -64,10 +65,10 @@ class TestView extends StatelessWidget {
                   delegate: SliverChildListDelegate.fixed(
                     <Widget>[
                       if (controller.questions[index].imageUrl != null) ...[
-                        Image(
-                          image: AssetImage(
-                              'assets/images/${controller.questions[index].categoryId}/${controller.questions[index].imageUrl}'),
-                        )
+                        VPlayer(
+                          asset:
+                              'assets/images/${controller.questions[index].categoryId}/${controller.questions[index].imageUrl}',
+                        ),
                       ],
                       Text(
                         controller.questions[index].text,
