@@ -12,7 +12,7 @@ class TestResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Výsledky"),
+          title: const Text("Výsledky"),
           actions: [],
         ),
         body: CustomScrollView(
@@ -22,12 +22,48 @@ class TestResultView extends StatelessWidget {
               sliver: SliverList(
                 delegate: SliverChildListDelegate.fixed(
                   <Widget>[
-                    Text("Úspěšnost: ${controller.successRate()}%"),
-                    SizedBox(height: 20),
-                    Text("Correct: ${controller.correct()}"),
-                    Text("Incorrect: ${controller.incorrect()}"),
-                    SizedBox(height: 20),
-                    Text("Špatně odpovězené otázky:"),
+                    CustomCard(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "${controller.successRate()}%",
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const Spacer(),
+                              RichText(
+                                text: TextSpan(
+                                  style:
+                                      TextStyle(fontSize: 16.0, color: Theme.of(context).textTheme.bodyMedium!.color),
+                                  children: [
+                                    TextSpan(
+                                        text: '${controller.correct()}', style: const TextStyle(color: Colors.green)),
+                                    const TextSpan(text: ' / '),
+                                    TextSpan(text: '${controller.params.answeredQuestions.length}'),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          LinearProgressIndicator(
+                            value: controller.successRate() / 100,
+                            color: Colors.green,
+                            backgroundColor: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    const Divider(),
+                    const SizedBox(height: 15),
+                    const Text(
+                      "Špatně odpovězené otázky:",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 15),
                     ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -41,20 +77,24 @@ class TestResultView extends StatelessWidget {
                               children: [
                                 Text(controller.params.incorrectQuestions[index].text,
                                     style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                                const SizedBox(height: 15),
                                 ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: controller.params.incorrectQuestions[index].answers.length,
                                   itemBuilder: (BuildContext c, int i) {
-                                    return Text(
-                                      controller.params.incorrectQuestions[index].answers[i].text,
-                                      style: TextStyle(
-                                          color: controller.params.showedAnswers
-                                                  .contains(controller.params.incorrectQuestions[index].answers[i])
-                                              ? (controller.params.incorrectQuestions[index].answers[i].isCorrect
-                                                  ? Colors.green
-                                                  : Colors.red)
-                                              : null),
+                                    return Padding(
+                                      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 4.0, bottom: 4.0),
+                                      child: Text(
+                                        "\u2022  ${controller.params.incorrectQuestions[index].answers[i].text}",
+                                        style: TextStyle(
+                                            color: controller.params.showedAnswers
+                                                    .contains(controller.params.incorrectQuestions[index].answers[i])
+                                                ? (controller.params.incorrectQuestions[index].answers[i].isCorrect
+                                                    ? Colors.green
+                                                    : Colors.red)
+                                                : null),
+                                      ),
                                     );
                                   },
                                 ),
