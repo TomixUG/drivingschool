@@ -22,6 +22,11 @@ class TestView extends StatelessWidget {
         ),
         actions: [
           IconButton(
+            icon: const Icon(Icons.done),
+            tooltip: 'Vyhodnotit test',
+            onPressed: controller.finishTest,
+          ),
+          IconButton(
             icon: const Icon(Icons.star_border),
             tooltip: 'Označit',
             onPressed: () {
