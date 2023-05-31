@@ -28,8 +28,6 @@ class _VPlayerState extends State<VPlayer> {
             _controller.play();
           });
         });
-    } else {
-      // image
     }
   }
 
