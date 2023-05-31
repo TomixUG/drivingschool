@@ -5,9 +5,12 @@ class TestResultModel {
   final List<Answer> showedAnswers;
   final List<Question> answeredQuestions;
 
-  final int correct;
-  final int incorrect;
+  final List<Question> correctQuestions;
+  final List<Question> incorrectQuestions;
 
   TestResultModel(
-      {required this.showedAnswers, required this.answeredQuestions, required this.correct, required this.incorrect});
+      {required this.showedAnswers,
+      required this.answeredQuestions,
+      required this.correctQuestions,
+      required this.incorrectQuestions});
 }

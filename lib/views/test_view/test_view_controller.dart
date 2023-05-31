@@ -13,8 +13,9 @@ class TestViewController extends GetxController {
 
   final showedAnswers = <Answer>[].obs;
   final answeredQuestions = <Question>[].obs;
-  var correct = 0.obs;
-  var incorrect = 0.obs;
+
+  final correctQuestions = <Question>[].obs;
+  final incorrectQuestions = <Question>[].obs;
 
   @override
   void onInit() async {
@@ -27,14 +28,14 @@ class TestViewController extends GetxController {
 
     if (answer.isCorrect) {
       showedAnswers.add(answer);
-      correct++;
+      correctQuestions.add(question);
     } else {
       // add all correct answers
       for (var a in question.answers) {
         if (a.isCorrect) showedAnswers.add(a);
       }
       showedAnswers.add(answer);
-      incorrect++;
+      incorrectQuestions.add(question);
     }
   }
 
@@ -51,8 +52,8 @@ class TestViewController extends GetxController {
       arguments: TestResultModel(
         showedAnswers: showedAnswers,
         answeredQuestions: answeredQuestions,
-        correct: correct.value,
-        incorrect: incorrect.value,
+        correctQuestions: correctQuestions,
+        incorrectQuestions: incorrectQuestions,
       ),
     );
   }
