@@ -13,12 +13,13 @@ class VPlayer extends StatefulWidget {
 class _VPlayerState extends State<VPlayer> {
   late VideoPlayerController _controller;
 
+  late var isVideo = widget.asset.split(".").last == "mp4";
+
   @override
   void initState() {
     super.initState();
-
     // check whether asset is video or image
-    if (widget.asset.split(".").last == "mp4") {
+    if (isVideo) {
       // video
       _controller = VideoPlayerController.asset(widget.asset)
         ..initialize().then((_) {
@@ -34,13 +35,15 @@ class _VPlayerState extends State<VPlayer> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (isVideo) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.asset.split(".").last == "mp4") {
+    if (isVideo) {
       return _controller.value.isInitialized
           ? ConstrainedBox(
               constraints: const BoxConstraints(),
