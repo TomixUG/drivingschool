@@ -46,19 +46,22 @@ class OverviewView extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  CircularPercentIndicator(
-                                    radius: 25.0,
-                                    lineWidth: 5.0,
-                                    percent: 0.4,
-                                    // center: new Text("100%"),
-                                    progressColor: Colors.green,
+                                  Obx(
+                                    () => CircularPercentIndicator(
+                                      radius: 25.0,
+                                      lineWidth: 5.0,
+                                      percent: controller.completionRate.value,
+                                      progressColor: Colors.green,
+                                    ),
                                   ),
                                   const SizedBox(width: 10),
-                                  const Column(
+                                  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Hotové: "),
-                                      Text("40 %"),
+                                      const Text("Hotové: "),
+                                      Obx(
+                                        () => Text("${(controller.completionRate * 100).toStringAsFixed(1)} %"),
+                                      )
                                     ],
                                   ),
                                 ],

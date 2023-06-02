@@ -7,6 +7,7 @@ class OverviewViewController extends GetxController {
   var flaggedAmount = 0.obs;
   var wrongAmount = 0.obs;
   var unshowedAmount = 0.obs;
+  var completionRate = 0.0.obs;
 
   @override
   void onInit() async {
@@ -23,6 +24,7 @@ class OverviewViewController extends GetxController {
     flaggedAmount.value = await Get.find<DbController>().getFlaggedAmount();
     wrongAmount.value = await Get.find<DbController>().getWrongAmount();
     unshowedAmount.value = await Get.find<DbController>().getUnshowedAmount();
+    completionRate.value = await Get.find<DbController>().getCompletionRate();
   }
 
   void openFlagged() async {
