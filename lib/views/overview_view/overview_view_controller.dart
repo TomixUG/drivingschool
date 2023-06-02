@@ -36,4 +36,10 @@ class OverviewViewController extends GetxController {
     if (questions.isEmpty) return;
     Get.toNamed("/test", arguments: questions);
   }
+
+  void openUnshowed() async {
+    List<Question> questions = await Get.find<DbController>().getUnshowed();
+    if (questions.isEmpty) return;
+    Get.toNamed("/test", arguments: questions);
+  }
 }
