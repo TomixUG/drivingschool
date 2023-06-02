@@ -119,6 +119,21 @@ class DbController extends GetxController {
     return result[0]['amount'] as int;
   }
 
+  Future<List<Question>> getFlagged() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
+      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id,
+      COALESCE(dataDb.user_answers.flagged, 0) AS flagged
+      from questions join answers
+      on (questions.id = answers.question_id)
+      left join dataDb.user_answers
+      on(questions.id = dataDb.user_answers.question_id)
+      where dataDb.user_answers.flagged = 1
+      order by random();
+    ''');
+    return parseQuestions(result);
+  }
+
   Future<int> getWrongAmount() async {
     final List<Map<String, Object?>> result = await _database.rawQuery('''
       select count(*) as amount

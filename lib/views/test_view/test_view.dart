@@ -17,8 +17,10 @@ class TestView extends StatelessWidget {
         title: Obx(() => Text("Otázka ${controller.currentQuestion.value + 1}/${controller.questions.length}")),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(0),
-          child: Obx(() =>
-              LinearProgressIndicator(value: controller.currentQuestion.value / (controller.questions.length - 1))),
+          child: (controller.questions.length == 1)
+              ? const LinearProgressIndicator(value: 1)
+              : Obx(() =>
+                  LinearProgressIndicator(value: controller.currentQuestion.value / (controller.questions.length - 1))),
         ),
         actions: [
           IconButton(
