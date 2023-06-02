@@ -110,6 +110,34 @@ class DbController extends GetxController {
     ''');
   }
 
+  Future<int> getFlaggedAmount() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select count(*) as amount
+      from user_answers
+      where flagged = 1;
+    ''');
+    return result[0]['amount'] as int;
+  }
+
+  Future<int> getWrongAmount() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select count(*) as amount
+      from user_answers
+      where is_correct = 0;
+    ''');
+    return result[0]['amount'] as int;
+  }
+
+  Future<int> getUnshowedAmount() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select count(*) as amount
+      from questions
+      left join dataDb.user_answers on questions.id = dataDb.user_answers.question_id
+      where user_answers.question_id IS NULL;
+    ''');
+    return result[0]['amount'] as int;
+  }
+
   // void test() {
   //   // _database.rawQuery("SELECT * from dataDb.progress");
   //   _database.rawQuery(
