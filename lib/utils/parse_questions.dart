@@ -10,6 +10,7 @@ List<Question> parseQuestions(List<Map<String, Object?>> data) {
     final questionText = row['question_text'] as String;
     final questionImageUrl = row['question_image_url'] as String?;
     final categoryId = row['question_category_id'] as String;
+    final flagged = row['flagged'] == 0 ? false : true;
 
     // Check if the question has been created already
     if (!questionMap.containsKey(questionId)) {
@@ -20,6 +21,7 @@ List<Question> parseQuestions(List<Map<String, Object?>> data) {
         imageUrl: questionImageUrl,
         categoryId: categoryId,
         answers: [],
+        flagged: flagged,
       );
       questionMap[questionId] = question;
     }

@@ -78,6 +78,7 @@ class TestView extends StatelessWidget {
                           ),
                         ),
                       ],
+                      Text("${controller.questions[index].flagged}"),
                       Text(
                         controller.questions[index].text,
                         style: const TextStyle(fontSize: 16),

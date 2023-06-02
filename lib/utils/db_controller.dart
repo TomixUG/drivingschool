@@ -56,9 +56,12 @@ class DbController extends GetxController {
   Future<List<Question>> getAllQuestions() async {
     final List<Map<String, Object?>> result = await _database.rawQuery('''
       select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
-      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
+      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id,
+      COALESCE(dataDb.user_answers.flagged, 0) AS flagged
       from questions join answers
       on (questions.id = answers.question_id)
+      left join dataDb.user_answers
+      on(questions.id = dataDb.user_answers.question_id)
       order by random();
     ''');
     return parseQuestions(result);
@@ -77,9 +80,12 @@ class DbController extends GetxController {
   Future<List<Question>> getQuestions(String categoryId) async {
     final List<Map<String, Object?>> result = await _database.rawQuery('''
       select questions.id as question_id, questions.text as question_text, questions.image_url as question_image_url, questions.category_id as question_category_id,
-      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id
+      answers.id as answer_id, answers.text as answer_text, answers.is_correct as answer_is_correct, answers.question_id as answer_question_id,
+      COALESCE(dataDb.user_answers.flagged, 0) AS flagged
       from questions join answers
       on (questions.id = answers.question_id)
+      left join dataDb.user_answers
+      on(questions.id = dataDb.user_answers.question_id)
       where questions.category_id = ?
       order by random();
     ''', [categoryId]);
