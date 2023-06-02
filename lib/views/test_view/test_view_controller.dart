@@ -1,5 +1,6 @@
 import 'package:drivingschool/models/answer.dart';
 import 'package:drivingschool/models/question.dart';
+import 'package:drivingschool/utils/db_controller.dart';
 import 'package:drivingschool/views/test_view/test_result/test_result_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,19 +24,23 @@ class TestViewController extends GetxController {
     super.onInit();
   }
 
-  void submitAnswer(Answer answer, Question question) {
+  void submitAnswer(Answer answer, Question question) async {
     answeredQuestions.add(question);
 
     if (answer.isCorrect) {
       showedAnswers.add(answer);
+      // answer is correct
       correctQuestions.add(question);
+      Get.find<DbController>().setCorrect(question.id, true); // save the answer
     } else {
       // add all correct answers
       for (var a in question.answers) {
         if (a.isCorrect) showedAnswers.add(a);
       }
       showedAnswers.add(answer);
+      // answer is incorrect
       incorrectQuestions.add(question);
+      Get.find<DbController>().setCorrect(question.id, false); // save the answer
     }
   }
 

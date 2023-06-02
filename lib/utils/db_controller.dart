@@ -27,12 +27,10 @@ class DbController extends GetxController {
         debugPrint("creating dataDb tables...");
         await db.execute('''
           CREATE TABLE user_answers (
-            id INTEGER PRIMARY KEY,
-            question_id TEXT NOT NULL,
-            answer_id TEXT NOT NULL,
-            is_correct BOOLEAN NOT NULL,
-            FOREIGN KEY (question_id) REFERENCES questions (id),
-            FOREIGN KEY (answer_id) REFERENCES answers (id)
+            question_id TEXT PRIMARY KEY,
+            is_correct BOOLEAN,
+            flagged BOOLEAN NOT NULL default 0,
+            FOREIGN KEY (question_id) REFERENCES questions(id)
           );
           ''');
       },
@@ -86,6 +84,24 @@ class DbController extends GetxController {
       order by random();
     ''', [categoryId]);
     return parseQuestions(result);
+  }
+
+  void setCorrect(String questionId, bool isCorrect) async {
+    await _database.rawQuery('''
+      INSERT OR REPLACE INTO dataDb.user_answers (question_id, is_correct)
+      VALUES ('$questionId', $isCorrect)
+      ON CONFLICT (question_id) DO UPDATE SET
+      is_correct = $isCorrect;
+    ''');
+  }
+
+  void setFlagged(String questionId, bool isFlagged) async {
+    await _database.rawQuery('''
+      INSERT OR REPLACE INTO dataDb.user_answers (question_id, is_flagged)
+      VALUES ('$questionId', $isFlagged)
+      ON CONFLICT (question_id) DO UPDATE SET
+      is_flagged = $isFlagged;
+    ''');
   }
 
   // void test() {
