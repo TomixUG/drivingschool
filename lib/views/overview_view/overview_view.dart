@@ -28,8 +28,8 @@ class OverviewView extends StatelessWidget {
                       margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
                       child: Column(
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.dashboard),
                               SizedBox(width: 20),
                               Text(
@@ -54,9 +54,9 @@ class OverviewView extends StatelessWidget {
                                     progressColor: Colors.green,
                                   ),
                                   const SizedBox(width: 10),
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
+                                    children: [
                                       Text("Hotové: "),
                                       Text("40 %"),
                                     ],
@@ -69,13 +69,13 @@ class OverviewView extends StatelessWidget {
                                     radius: 25.0,
                                     lineWidth: 25.0,
                                     percent: 1,
-                                    center: new Text("10%", style: TextStyle(color: Colors.white)),
+                                    center: const Text("10%", style: TextStyle(color: Colors.white)),
                                     progressColor: Colors.red,
                                   ),
                                   const SizedBox(width: 10),
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const [
+                                    children: [
                                       Text("Úspěšnost: "),
                                       Text("Neprošel", style: TextStyle(color: Colors.red)),
                                     ],
@@ -96,8 +96,8 @@ class OverviewView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.flag),
                               SizedBox(width: 20),
                               Text(
@@ -106,8 +106,8 @@ class OverviewView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Text("${controller.flaggedAmount} otázek"),
+                          const SizedBox(height: 10),
+                          Obx(() => Text("${controller.flaggedAmount} otázek")),
                         ],
                       ),
                     ),
@@ -120,8 +120,8 @@ class OverviewView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.close),
                               SizedBox(width: 20),
                               Text(
@@ -130,8 +130,8 @@ class OverviewView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Text("${controller.wrongAmount} otázek"),
+                          const SizedBox(height: 10),
+                          Obx(() => Text("${controller.wrongAmount} otázek")),
                         ],
                       ),
                     ),
@@ -144,8 +144,8 @@ class OverviewView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: const [
+                          const Row(
+                            children: [
                               Icon(Icons.question_mark),
                               SizedBox(width: 20),
                               Text(
@@ -154,8 +154,8 @@ class OverviewView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Text("${controller.unshowedAmount} otázek"),
+                          const SizedBox(height: 10),
+                          Obx(() => Text("${controller.unshowedAmount} otázek")),
                         ],
                       ),
                     ),

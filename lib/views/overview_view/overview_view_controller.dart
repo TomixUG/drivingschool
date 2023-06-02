@@ -18,6 +18,7 @@ class OverviewViewController extends GetxController {
   }
 
   void loadAmounts() async {
+    debugPrint("loading amounts...");
     flaggedAmount.value = await Get.find<DbController>().getFlaggedAmount();
     wrongAmount.value = await Get.find<DbController>().getWrongAmount();
     unshowedAmount.value = await Get.find<DbController>().getUnshowedAmount();

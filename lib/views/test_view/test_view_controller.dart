@@ -1,6 +1,7 @@
 import 'package:drivingschool/models/answer.dart';
 import 'package:drivingschool/models/question.dart';
 import 'package:drivingschool/utils/db_controller.dart';
+import 'package:drivingschool/views/overview_view/overview_view_controller.dart';
 import 'package:drivingschool/views/test_view/test_result/test_result_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,10 +19,19 @@ class TestViewController extends GetxController {
   final correctQuestions = <Question>[].obs;
   final incorrectQuestions = <Question>[].obs;
 
+  final OverviewViewController overviewController = Get.find(); // to refresh the amounts
+
   @override
   void onInit() async {
     debugPrint("testview init");
     super.onInit();
+  }
+
+  @override
+  onClose() {
+    debugPrint("closing..");
+    overviewController.loadAmounts(); // refresh amounts in overview
+    super.onClose();
   }
 
   void submitAnswer(Answer answer, Question question) async {
