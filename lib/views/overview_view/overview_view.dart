@@ -68,19 +68,26 @@ class OverviewView extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  CircularPercentIndicator(
-                                    radius: 25.0,
-                                    lineWidth: 25.0,
-                                    percent: 1,
-                                    center: const Text("10%", style: TextStyle(color: Colors.white)),
-                                    progressColor: Colors.red,
+                                  Obx(
+                                    () => CircularPercentIndicator(
+                                      radius: 25.0,
+                                      lineWidth: 25.0,
+                                      percent: 1,
+                                      center: Text("${(controller.successRate * 100).toStringAsFixed(1)}%",
+                                          style: const TextStyle(color: Colors.white)),
+                                      progressColor: (controller.successRate >= 0.86) ? Colors.green : Colors.red,
+                                    ),
                                   ),
                                   const SizedBox(width: 10),
-                                  const Column(
+                                  Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text("Úspěšnost: "),
-                                      Text("Neprošel", style: TextStyle(color: Colors.red)),
+                                      const Text("Úspěšnost: "),
+                                      Obx(
+                                        () => (controller.successRate >= 0.86)
+                                            ? const Text("Prošel", style: TextStyle(color: Colors.green))
+                                            : const Text("Neprošel", style: TextStyle(color: Colors.red)),
+                                      ),
                                     ],
                                   ),
                                 ],

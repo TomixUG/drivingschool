@@ -190,6 +190,15 @@ class DbController extends GetxController {
     return result[0]['amount'] as double;
   }
 
+  Future<double> getSuccessRate() async {
+    final List<Map<String, Object?>> result = await _database.rawQuery('''
+      select 
+      CAST((select count(*) from dataDb.user_answers where is_correct = 1) as REAL) /
+      (select count(*) from dataDb.user_answers where is_correct is not null) as amount;
+    ''');
+    return result[0]['amount'] as double;
+  }
+
   // void test() {
   //   // _database.rawQuery("SELECT * from dataDb.progress");
   //   _database.rawQuery(
