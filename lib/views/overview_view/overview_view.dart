@@ -114,7 +114,7 @@ class OverviewView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   CustomCard(
-                    onTap: () {},
+                    onTap: controller.openWrong,
                     child: Container(
                       margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 16.0),
                       child: Column(

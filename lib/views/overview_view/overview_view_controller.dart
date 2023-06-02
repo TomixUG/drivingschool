@@ -30,4 +30,10 @@ class OverviewViewController extends GetxController {
     if (questions.isEmpty) return;
     Get.toNamed("/test", arguments: questions);
   }
+
+  void openWrong() async {
+    List<Question> questions = await Get.find<DbController>().getWrong();
+    if (questions.isEmpty) return;
+    Get.toNamed("/test", arguments: questions);
+  }
 }
