@@ -26,12 +26,14 @@ class TestView extends StatelessWidget {
             tooltip: 'Vyhodnotit test',
             onPressed: controller.finishTest,
           ),
-          IconButton(
-            icon: const Icon(Icons.star_border),
-            tooltip: 'Označit',
-            onPressed: () {
-              // handle the press
-            },
+          Obx(
+            () => IconButton(
+              icon: controller.questions[controller.currentQuestion.value].flagged
+                  ? const Icon(Icons.flag)
+                  : const Icon(Icons.flag_outlined),
+              tooltip: controller.questions[controller.currentQuestion.value].flagged ? 'Odoznačit' : 'Označit',
+              onPressed: controller.flagQuestion,
+            ),
           ),
         ],
       ),
@@ -39,7 +41,7 @@ class TestView extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.4),
         // height: 50,
         child: Container(
-          margin: EdgeInsets.all(12),
+          margin: const EdgeInsets.all(12),
           child: Row(
             children: [
               ElevatedButton(
@@ -78,7 +80,6 @@ class TestView extends StatelessWidget {
                           ),
                         ),
                       ],
-                      Text("${controller.questions[index].flagged}"),
                       Text(
                         controller.questions[index].text,
                         style: const TextStyle(fontSize: 16),

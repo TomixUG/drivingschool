@@ -6,7 +6,7 @@ class Question {
   final String? imageUrl;
   final String categoryId;
   final List<Answer> answers;
-  final bool flagged;
+  bool flagged;
 
   Question({
     required this.id,

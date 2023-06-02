@@ -103,10 +103,10 @@ class DbController extends GetxController {
 
   void setFlagged(String questionId, bool isFlagged) async {
     await _database.rawQuery('''
-      INSERT OR REPLACE INTO dataDb.user_answers (question_id, is_flagged)
+      INSERT OR REPLACE INTO dataDb.user_answers (question_id, flagged)
       VALUES ('$questionId', $isFlagged)
       ON CONFLICT (question_id) DO UPDATE SET
-      is_flagged = $isFlagged;
+      flagged = $isFlagged;
     ''');
   }
 

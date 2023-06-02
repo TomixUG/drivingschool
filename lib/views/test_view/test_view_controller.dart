@@ -63,6 +63,17 @@ class TestViewController extends GetxController {
     );
   }
 
+  void flagQuestion() async {
+    questions[currentQuestion.value].flagged = !questions[currentQuestion.value].flagged;
+
+    // force state refresh using this TODO: improve this garbage
+    currentQuestion += 1;
+    currentQuestion -= 1;
+
+    Get.find<DbController>()
+        .setFlagged(questions[currentQuestion.value].id, questions[currentQuestion.value].flagged); // save the answer
+  }
+
   void nextQuestion() async {
     if (switching == true) return;
 
