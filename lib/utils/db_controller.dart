@@ -187,7 +187,7 @@ class DbController extends GetxController {
     final List<Map<String, Object?>> result = await _database.rawQuery('''
      select CAST((select count(*) from dataDb.user_answers where is_correct is not null) as REAL) / CAST((select count(*) from questions) as REAL) as amount;
     ''');
-    return result[0]['amount'] as double;
+    return result[0]['amount'] == null ? 0 : result[0]['amount'] as double;
   }
 
   Future<double> getSuccessRate() async {
@@ -196,7 +196,7 @@ class DbController extends GetxController {
       CAST((select count(*) from dataDb.user_answers where is_correct = 1) as REAL) /
       (select count(*) from dataDb.user_answers where is_correct is not null) as amount;
     ''');
-    return result[0]['amount'] as double;
+    return result[0]['amount'] == null ? 0 : result[0]['amount'] as double;
   }
 
   // void test() {
