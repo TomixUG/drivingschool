@@ -24,10 +24,11 @@ class LearnQuestionsView extends StatelessWidget {
                   CustomCard(
                     onTap: () => controller.openTestAll(),
                     child: Container(
-                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
+                      margin: const EdgeInsets.only(
+                          left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
                       child: Row(
                         children: [
-                          const Text("All questions"),
+                          const Text("Všechny otázky"),
                           const Spacer(),
                           Text("${controller.getTotalCategories()}"),
                         ],
@@ -43,9 +44,11 @@ class LearnQuestionsView extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8, top: 8),
                         child: CustomCard(
-                          onTap: () => controller.openTestCategories(controller.categories[index].id),
+                          onTap: () => controller.openTestCategories(
+                              controller.categories[index].id),
                           child: Container(
-                            margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
+                            margin: const EdgeInsets.only(
+                                left: 16.0, right: 16.0, top: 4.0, bottom: 4.0),
                             child: Row(
                               children: [
                                 Text(controller.categories[index].name),

@@ -44,7 +44,7 @@ class _VPlayerState extends State<VPlayer> {
     if (isVideo) {
       return _controller.value.isInitialized
           ? ConstrainedBox(
-              constraints: const BoxConstraints(),
+              constraints: const BoxConstraints(maxHeight: 230),
               child: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
                 child: VideoPlayer(_controller),

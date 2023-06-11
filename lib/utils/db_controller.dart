@@ -39,11 +39,14 @@ class DbController extends GetxController {
     await dataDb.close();
 
     // questions database
-    io.Directory applicationDirectory = await getApplicationDocumentsDirectory();
-    String questionsDbPath = path.join(applicationDirectory.path, "questions.db");
+    io.Directory applicationDirectory =
+        await getApplicationDocumentsDirectory();
+    String questionsDbPath =
+        path.join(applicationDirectory.path, "questions.db");
     // Copy from asset
-    ByteData data = await rootBundle.load(path.join("assets/db", "questions.db"));
-    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    ByteData data = await rootBundle.load('assets/questions.db');
+    List<int> bytes =
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     // Write and flush the bytes written
     await io.File(questionsDbPath).writeAsBytes(bytes, flush: true);
 

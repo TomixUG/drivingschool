@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
             index: controller.tabIndex.value,
             children: [
               OverviewView(),
-              ExamView(),
+              // ExamView(),
               AllQuestionsView(),
             ],
           ),
@@ -32,8 +32,9 @@ class HomeView extends StatelessWidget {
           selectedIndex: controller.tabIndex.value,
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: "Učení"),
-            NavigationDestination(icon: Icon(Icons.assignment), label: "Zkouška"),
-            NavigationDestination(icon: Icon(Icons.book), label: "Všechny otázky"),
+            // NavigationDestination(icon: Icon(Icons.assignment), label: "Zkouška"),
+            NavigationDestination(
+                icon: Icon(Icons.book), label: "Všechny otázky"),
           ],
         ),
       ),

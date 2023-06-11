@@ -24,7 +24,9 @@ void main() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
-  if (!kIsWeb && Platform.isWindows) WindowsVideoPlayer.registerWith();
+  if (!kIsWeb && Platform.isWindows) {
+    WindowsVideoPlayer.registerWith();
+  }
   WidgetsFlutterBinding.ensureInitialized();
 
   // create instance of DbController (inits the db)
