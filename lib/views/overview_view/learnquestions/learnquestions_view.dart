@@ -27,7 +27,7 @@ class LearnQuestionsView extends StatelessWidget {
                       margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
                       child: Row(
                         children: [
-                          const Text("All questions"),
+                          const Text("Všechny otázky"),
                           const Spacer(),
                           Text("${controller.getTotalCategories()}"),
                         ],
