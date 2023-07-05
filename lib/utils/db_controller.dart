@@ -50,7 +50,12 @@ class DbController extends GetxController {
     _database = await openDatabase(questionsDbPath);
 
     // attach dataDb
-    await _database.rawQuery("ATTACH DATABASE '$dataDbPath' as 'dataDb'");
+    try {
+      await _database.rawQuery("ATTACH DATABASE '$dataDbPath' as 'dataDb'");
+    } catch (e) {
+      // database is already attached ignore
+      debugPrint("database already attached, not attaching again");
+    }
   }
 
   Future<List<Question>> getAllQuestions() async {
