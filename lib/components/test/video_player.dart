@@ -21,9 +21,12 @@ class _VPlayerState extends State<VPlayer> {
     // check whether asset is video or image
     if (isVideo) {
       // video
-      _controller = VideoPlayerController.asset(widget.asset)
-        ..initialize().then((_) {
+      _controller = VideoPlayerController.asset(
+        widget.asset,
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true), // dont stop background audio session
+      )..initialize().then((_) {
           setState(() {
+            _controller.setVolume(0);
             _controller.setLooping(true);
             _controller.play();
           });
