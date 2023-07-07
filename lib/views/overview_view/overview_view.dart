@@ -1,4 +1,5 @@
 import 'package:drivingschool/components/shared/custom_card.dart';
+import 'package:drivingschool/views/overview_view/learnquestions/learnquestions_view.dart';
 import 'package:drivingschool/views/overview_view/overview_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,146 +103,59 @@ class OverviewView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Divider(color: Theme.of(context).dividerColor, thickness: 0.5),
                   const SizedBox(height: 20),
-                  CustomCard(
-                    onTap: controller.openLearnQuestions,
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                      child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.arrow_forward_sharp),
-                              SizedBox(width: 20),
-                              Text(
-                                "Všechny kategorie otázek",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            IconButton.filledTonal(
+                              iconSize: 25,
+                              constraints: const BoxConstraints(minHeight: 60, minWidth: 60),
+                              onPressed: controller.openFlagged,
+                              icon: const Icon(Icons.flag),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text("Označené", style: TextStyle(fontSize: 15)),
+                            Obx(() => Text("${controller.flaggedAmount} otázek")),
+                          ],
+                        ),
+                        const Spacer(),
+                        Column(
+                          children: [
+                            IconButton.filledTonal(
+                              iconSize: 25,
+                              constraints: const BoxConstraints(minHeight: 60, minWidth: 60),
+                              onPressed: controller.openWrong,
+                              icon: const Icon(Icons.close),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text("Špatné", style: TextStyle(fontSize: 15)),
+                            Obx(() => Text("${controller.wrongAmount} otázek")),
+                          ],
+                        ),
+                        const Spacer(),
+                        Column(children: [
+                          IconButton.filledTonal(
+                            iconSize: 25,
+                            constraints: const BoxConstraints(minHeight: 60, minWidth: 60),
+                            onPressed: controller.openUnshowed,
+                            icon: const Icon(Icons.question_mark),
                           ),
-                        ],
-                      ),
+                          const SizedBox(height: 10),
+                          const Text("Nezobrazené", style: TextStyle(fontSize: 15)),
+                          Obx(() => Text("${controller.unshowedAmount} otázek")),
+                        ]),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          IconButton.filledTonal(
-                            iconSize: 30,
-                            constraints: const BoxConstraints(minHeight: 70, minWidth: 70),
-                            onPressed: controller.openFlagged,
-                            icon: const Icon(Icons.flag),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text("Označené", style: TextStyle(fontSize: 16)),
-                          Obx(() => Text("${controller.flaggedAmount} otázek")),
-                        ],
-                      ),
-                      const Spacer(),
-                      Column(
-                        children: [
-                          IconButton.filledTonal(
-                            iconSize: 30,
-                            constraints: const BoxConstraints(minHeight: 70, minWidth: 70),
-                            onPressed: controller.openWrong,
-                            icon: const Icon(Icons.close),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text("Špatné", style: TextStyle(fontSize: 16)),
-                          Obx(() => Text("${controller.wrongAmount} otázek")),
-                        ],
-                      ),
-                      const Spacer(),
-                      Column(children: [
-                        IconButton.filledTonal(
-                          iconSize: 30,
-                          constraints: const BoxConstraints(minHeight: 70, minWidth: 70),
-                          onPressed: controller.openUnshowed,
-                          icon: const Icon(Icons.question_mark),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text("Nezobrazené", style: TextStyle(fontSize: 16)),
-                        Obx(() => Text("${controller.unshowedAmount} otázek")),
-                      ]),
-                    ],
-                  ),
-                  // const SizedBox(height: 20),
-                  // CustomCard(
-                  //   onTap: controller.openFlagged,
-                  //   child: Container(
-                  //     margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         const Row(
-                  //           children: [
-                  //             Icon(Icons.flag),
-                  //             SizedBox(width: 20),
-                  //             Text(
-                  //               "Označené otázky",
-                  //               style: TextStyle(fontSize: 16),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         const SizedBox(height: 10),
-                  //         Obx(() => Text("${controller.flaggedAmount} otázek")),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 20),
-                  // CustomCard(
-                  //   onTap: controller.openWrong,
-                  //   child: Container(
-                  //     margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         const Row(
-                  //           children: [
-                  //             Icon(Icons.close),
-                  //             SizedBox(width: 20),
-                  //             Text(
-                  //               "Špatné otázky",
-                  //               style: TextStyle(fontSize: 16),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         const SizedBox(height: 10),
-                  //         Obx(() => Text("${controller.wrongAmount} otázek")),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 20),
-                  // CustomCard(
-                  //   onTap: controller.openUnshowed,
-                  //   child: Container(
-                  //     margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: 8.0),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         const Row(
-                  //           children: [
-                  //             Icon(Icons.question_mark),
-                  //             SizedBox(width: 20),
-                  //             Text(
-                  //               "Nezobrazené otázky",
-                  //               style: TextStyle(fontSize: 16),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         const SizedBox(height: 10),
-                  //         Obx(() => Text("${controller.unshowedAmount} otázek")),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
+                  Divider(color: Theme.of(context).dividerColor, thickness: 0.5),
+                  const SizedBox(height: 25),
+                  LearnQuestionsView(),
                 ],
               ),
             ),
